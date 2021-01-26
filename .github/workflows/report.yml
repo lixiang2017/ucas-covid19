@@ -10,6 +10,7 @@ on:
       - master
   schedule:
 #    - cron: '50 23 * * *'
+    - cron: '1 46 * * *'
     - cron: '2 16 * * *'
     - cron: '3 0 * * *'
 

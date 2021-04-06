@@ -25,7 +25,8 @@ verify_cert = False
 # 全局变量，如果使用自己的服务器运行请根据需要修改 ->以下变量<-
 user = "USERNAME"  # sep 账号
 passwd = r"PASSWORD"  # sep 密码
-api_key = "API_KEY"  # 可选， server 酱的通知 api key
+# api_key = "API_KEY"  # 可选， server 酱的通知 api key
+api_key = "API_NEW_KEY"  # 可选， server 酱的通知 api key
 
 # 可选，如果需要邮件通知，那么修改下面五行 :)
 smtp_port = "SMTP_PORT"
@@ -40,7 +41,8 @@ receiver_email = "RECEIVER_EMAIL"
 if os.environ.get('GITHUB_RUN_ID', None):
     user = os.environ.get('SEP_USER_NAME', '')  # sep账号
     passwd = os.environ.get('SEP_PASSWD', '')  # sep密码
-    api_key = os.environ.get('API_KEY', '')  # server酱的api，填了可以微信通知打卡结果，不填没影响
+    # api_key = os.environ.get('API_KEY', '')  # server酱的api，填了可以微信通知打卡结果，不填没影响
+    api_key = os.environ.get('API_NEW_KEY', '')  # server酱的api，填了可以微信通知打卡结果，不填没影响
 
     smtp_port = os.environ.get('SMTP_PORT', '465')  # 邮件服务器端口，默认为qq smtp服务器端口
     smtp_server = os.environ.get('SMTP_SERVER', 'smtp.qq.com')  # 邮件服务器，默认为qq smtp服务器
@@ -196,7 +198,9 @@ def server_chan_message(key, title, body):
     微信通知打卡结果
     """
     # 错误的key也可以发送消息，无需处理 :)
-    msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
+    # msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
+    # new version after 2021.04.01
+    msg_url = "https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(key, title, body)
     requests.get(msg_url)
 
 
